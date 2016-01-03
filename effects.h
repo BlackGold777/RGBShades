@@ -328,3 +328,65 @@ void scrollTextTwo() {
   scrollText(2, NORMAL, CRGB::Green, CRGB(0,0,8));
 }
 
+///////////////////////////////////////////////////////// ALIEN EFFECT //////////////////////////////////////////////
+// Global Mode
+int mode2;
+
+// Global Counter
+int counter4;
+
+// Pre-defined Brightness 
+int lux4[] = {30,60,100,150,200,255};
+
+
+ // Alien Effect Version #1 
+ void AlienV1() {
+
+  // startup tasks
+  if (effectInit == false) {
+    effectInit = true;
+    effectDelay = 50;
+    FastLED.clear();
+  }
+
+  // Declare Shapes
+  const uint8_t AL[] = {0, 4, 28, 27, 26, 25, 24, 31, 33, 35, 55, 54, 53,
+  60};
+  
+  const uint8_t RightG[] = { 10, 11, 12, 20, 14,
+  37, 39, 41, 43, 50, 49, 45, 44, 63, 64, 66, 67};
+
+  const uint8_t Right[] = {9, 13, 19, 18, 17, 16, 15, 38, 40, 42, 48, 47, 46, 65};
+
+  const uint8_t Eyes7[] = {32, 34};
+
+  // Increase Speed Here (i.e Mode+=5)
+  mode2+=abs(sin8(mode2*15));
+
+
+  // Alternate (Note: this can be improved alot)
+  if (mode2%20 < 10) { bright = 255, bright2 = 0;}
+  else if (mode2%20 > 10) { bright2 = 255, bright = 0;}
+  
+  // Draw & Loop through the Shapes
+  for (int z = 0; z < 14; z++) {
+       leds[AL[z]] = CHSV(cycleHue, 255, bright); }
+
+       // Nifty trick
+       if (counter4 % 200 > 100) {fadeAll(counter4+1);}
+
+   for (int a = 0; a < 17; a++) {
+       leds[RightG[a]] = CHSV(100, 200+sin8(counter4*15%255), sin8(x*counter4 / 40 %255)); }
+
+       for (int y = 0; y < 14; y++) {
+           leds[Right[y]] = CHSV(0, 255, bright2); }
+
+          for (int b = 0; b < 2; b++) {
+               leds[Eyes7[b]] = CHSV(0, 255, lux4[sin8(counter4*5) %6]); }
+
+          // Increment Counter
+          counter4++;
+       
+ }
+ 
+ ///////////////////////////////////////////////////////////END OF CODE////////////////////////////////////////////

@@ -390,3 +390,39 @@ int lux4[] = {30,60,100,150,200,255};
  }
  
  ///////////////////////////////////////////////////////////END OF CODE////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////// -- PSYCHIC ENERGY -- ////////////////////////////////////////////
+/// SERIOUSLY KIDS DO NOT! I REPEAT DO NOT! TRY THIS AT HOME :)   ///////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////// NO SERIOUSLY! ///////////////////////////////////////////////////
+byte PSY = 0;
+int counter2 = 0;
+void PSY() {
+
+  // startup tasks
+  if (effectInit == false) {
+    effectInit = true;
+    effectDelay = 5;
+    PSY = 0;
+  }
+
+  // Just for good measure
+  if (counter2 > 500) counter2 = 0;
+
+  // Draw one frame of the animation into the LED array
+  for (byte x = 0; x < kMatrixWidth; x++) {
+    int brightness = abs(x * (256 / kMatrixWidth) - quadwave8(PSY) * (20 / (PSY) + 127)) * 3;
+    
+       if (brightness > 255) brightness = 255;
+    
+         CRGB riderColor = CHSV(sin8(counter2*50), 255, qmul8(brightness, --counter2));
+         
+    for (byte y = 0; y < kMatrixHeight; y++) {
+      leds[XY(x, y)] = riderColor;
+    }
+  }
+
+  PSY++; 
+  counter2++;
+
+}

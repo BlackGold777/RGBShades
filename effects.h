@@ -104,3 +104,43 @@ void PSY() {
 }
 
  /////////////////////////////////////////////////////////// END OF CODE ///////////////////////////////////////////////////
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Slant Bars Mod :)
+
+byte slantPos4 = 0;
+int counter4=0;
+void slantBars_mod4() {
+
+  // startup tasks
+  if (effectInit == false) {
+    effectInit = true;
+    effectDelay = 5;
+  }
+
+
+if (counter4 > 300) counter4=0;
+
+ if (counter4 > 100 && counter4 < 150) {
+  effectDelay = effectDelay + 1 % 150;
+ }
+
+ if (counter4 > 150 && counter4 < 225) {
+ effectDelay = effectDelay + 3 % 300;
+ }
+ else {
+  effectDelay = 5 + counter4 % 30;
+ }
+  for (byte x = 0; x < kMatrixWidth; x++) {
+    for (byte y = 0; y < kMatrixHeight; y++) {
+      leds[XY(x, y)] = CHSV(cycleHue, 255, cubicwave8(x * 10 + y * 10 + slantPos4));
+    }
+  }
+
+  slantPos4 -= 8;
+  counter4++;
+
+}
+

@@ -1,4 +1,15 @@
+
+
+
+
+
+
+
 ///////////////////////////////////////////////////////// ALIEN EFFECT //////////////////////////////////////////////
+
+// Global Brightness
+int bright = 0;
+int bright2 = 0;
 
 
 // Global Mode
@@ -79,7 +90,6 @@ void PSY() {
   if (effectInit == false) {
     effectInit = true;
     effectDelay = 5;
-    PSY = 0;
   }
 
   // Just for good measure

@@ -52,7 +52,7 @@ int lux4[] = {30,60,100,150,200,255};
        if (counter4 % 200 > 100) {fadeAll(counter4+1);}
 
    for (int a = 0; a < 17; a++) {
-       leds[RightG[a]] = CHSV(100, 200+sin8(counter4*15%255), sin8(x*counter4 / 40 %255)); }
+       leds[RightG[a]] = CHSV(100, 200+sin8(counter4*15%255), sin8(a*counter4 / 40 %255)); }
 
        for (int y = 0; y < 14; y++) {
            leds[Right[y]] = CHSV(0, 255, bright2); }

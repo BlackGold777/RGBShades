@@ -77,12 +77,13 @@ byte PSY = 0;
 int counter2 = 0;
 
 
-void PSY() {
+void PSY1() {
 
   // startup tasks
   if (effectInit == false) {
     effectInit = true;
     effectDelay = 5;
+    PSY = 0;
   }
 
   // Just for good measure
@@ -146,4 +147,37 @@ if (counter4 > 300) counter4=0;
   counter4++;
 
 }
+
+
+void Flashing() {
+
+  // startup tasks
+  if (effectInit == false) {
+    effectInit = true;
+    effectDelay = 50;
+    FastLED.clear();
+  }
+  
+  const uint8_t Left[] = {0, 1, 2, 3, 4, 29, 28, 27, 26, 25, 24, 23, 30,
+  31, 32, 33, 34, 35, 36, 57, 56, 55, 54, 53, 52, 51, 58, 59, 60, 61, 62};
+  
+  const uint8_t Right[] = {9, 10, 11, 12, 13, 20, 19, 18, 17, 16, 15, 14,
+  37, 38, 39, 40, 41, 42, 43, 50, 49, 48, 47, 46, 45, 44, 63, 64, 65, 66, 67};
+
+  // Increase Speed Here (i.e Mode+=5)
+  mode+=5;
+
+  if (mode%20 < 10) { bright = 255, bright2 = 0;}
+  else if (mode%20 > 10) { bright2 = 255, bright = 0;}
+  
+  //Alternate
+for (int z = 0; z < 31; z++) {
+       leds[Left[z]] = CHSV(0, 255, bright); }
+
+
+     for (int y = 0; y < 31; y++) {
+           leds[Right[y]] = CHSV(150, 255, bright2); }
+       
+ }
+
 
